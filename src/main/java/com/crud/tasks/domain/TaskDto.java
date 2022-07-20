@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class TaskDto {
-    private Long Id;
+    private Long id;
     private String title;
     private String content;
 }

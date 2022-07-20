@@ -18,7 +18,7 @@ public class Task {
 
     @Id
     @GeneratedValue
-    private long Id;
+    private Long Id;
 
     @Column(name = "name")
     private String title;
