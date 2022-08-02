@@ -9,4 +9,4 @@ echo.
 echo There were errors
 
 :startChrome
-call start Chrome http://localhost:8080/crud/v1/task/tasks
+call start Chrome http://localhost:8080/crud/v1/tasks
