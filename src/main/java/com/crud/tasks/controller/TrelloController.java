@@ -23,7 +23,7 @@ public class TrelloController {
         return ResponseEntity.ok(trelloClient.getTrelloBoards());
     }
 
-    @PostMapping("cards")
+    @PostMapping(value = "cards")
     public ResponseEntity<CreatedTrelloCard> createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return ResponseEntity.ok(trelloClient.createNewCard(trelloCardDto));
     }
