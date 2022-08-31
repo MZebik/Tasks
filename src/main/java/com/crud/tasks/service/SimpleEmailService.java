@@ -1,6 +1,7 @@
 package com.crud.tasks.service;
 
 import com.crud.tasks.domain.Mail;
+import com.crud.tasks.domain.Mail.MailBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.MailException;
@@ -28,11 +29,12 @@ public class SimpleEmailService {
         }
     }
 
-    private SimpleMailMessage createMailMessage(final Mail mail) {
+    private SimpleMailMessage createMailMessage(Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-                .To(mail.getMailTo())
-                .Subject(mail.getSubject())
-                .Text(mail.getMessage())
+        mail = Mail.builder()
+                .mailTo(mail.getMailTo())
+                .message(mail.getMessage())
+                .subject(mail.getSubject())
                 .toCc(mail.getToCc())
                 .build();
 
