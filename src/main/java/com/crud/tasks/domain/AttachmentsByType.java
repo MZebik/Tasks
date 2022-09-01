@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class AttachmentByType {
+public class AttachmentsByType {
 
     @JsonProperty("trello")
     private Trello trello;

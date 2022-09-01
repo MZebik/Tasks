@@ -31,12 +31,10 @@ public class SimpleEmailService {
 
     private SimpleMailMessage createMailMessage(Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mail = Mail.builder()
-                .mailTo(mail.getMailTo())
-                .message(mail.getMessage())
-                .subject(mail.getSubject())
-                .toCc(mail.getToCc())
-                .build();
+        mailMessage.setTo(mail.getMailTo());
+        mailMessage.setSubject(mail.getSubject());
+        mailMessage.setText(mail.getMessage());
+        Optional.ofNullable(mail.getToCc()).ifPresent(cc -> mailMessage.setCc(cc));
 
         return mailMessage;
     }

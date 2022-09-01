@@ -31,7 +31,6 @@ class SimpleEmailServiceTest {
                 .mailTo("test@test.com")
                 .subject("Test")
                 .message("Test message")
-                .toCc(Optional.of("Test@test.com"))
                 .build();
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
