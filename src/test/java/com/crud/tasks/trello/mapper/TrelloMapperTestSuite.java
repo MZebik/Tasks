@@ -2,8 +2,6 @@ package com.crud.tasks.trello.mapper;
 
 import com.crud.tasks.domain.*;
 import com.crud.tasks.mapper.TrelloMapper;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -68,6 +66,7 @@ public class TrelloMapperTestSuite {
         TrelloListDto trelloListDto = trelloMapper.mapToListDto(trelloList).get(0);
         // Then
         assertEquals("test list", trelloListDto.getName());
+        assertEquals(true, trelloListDto.isClosed());
     }
 
     @Test
@@ -78,6 +77,7 @@ public class TrelloMapperTestSuite {
         TrelloCardDto trelloCardDto = trelloMapper.mapToCardDto(trelloCard);
         // Then
         assertEquals("Test Card", trelloCardDto.getName());
+        assertEquals("test", trelloCardDto.getPos());
     }
 
     @Test
@@ -88,5 +88,6 @@ public class TrelloMapperTestSuite {
         TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
         // Then
         assertEquals("New test card", trelloCard.getDescription());
+        assertEquals("list1", trelloCardDto.getListId());
     }
 }
