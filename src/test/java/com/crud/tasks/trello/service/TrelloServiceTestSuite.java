@@ -10,13 +10,16 @@ import com.crud.tasks.scheduler.EmailScheduler;
 import com.crud.tasks.service.SimpleEmailService;
 import com.crud.tasks.service.TrelloService;
 import com.crud.tasks.trello.client.TrelloClient;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 
@@ -31,18 +34,24 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class TrelloServiceTestSuite {
 
-    @InjectMocks
-    TrelloService trelloService;
-    @Mock
+    @MockBean
     TrelloClient trelloClient;
-    @Mock
+    @MockBean
     SimpleEmailService emailService;
     @InjectMocks
     EmailScheduler emailScheduler;
-    @Mock
+    @MockBean
     TaskRepository taskRepository;
-    @Autowired
+    @MockBean
     AdminConfig adminConfig;
+    @InjectMocks
+    TrelloService trelloService;
+
+    @BeforeEach
+    public void prepare() {
+        trelloService=null;
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     void shouldFetchTrelloBoards() {
@@ -53,20 +62,19 @@ public class TrelloServiceTestSuite {
         assertThat(trelloBoardDtoList).isNotNull();
     }
 
-//    @Test
-//    void shouldCreateCard() {
-//        // Given
-//        TrelloCardDto trelloCardDto = new TrelloCardDto("test", "new test", "test", "test1");
-//        Mail mailMock = mock(Mail.class);
-//        when(trelloClient.createNewCard(any(TrelloCardDto.class))).thenReturn(new CreatedTrelloCardDto("testId", "test", "http"));
-//        doNothing().when(emailService).send(any(Mail.class));
-//
-//
-//        // When
-//        CreatedTrelloCardDto createdTrelloCardDto = trelloService.createTrelloCard(trelloCardDto);
-//        // Then
-//        assertEquals("test", createdTrelloCardDto.getName());
-//    }
+    @Test
+    void shouldCreateCard() {
+        // Given
+        TrelloCardDto trelloCardDto = new TrelloCardDto("test", "new test", "test", "test1");
+        when(trelloClient.createNewCard(any())).thenReturn(new CreatedTrelloCardDto("testId", "test", "http"));
+        doNothing().when(emailService).send(any(Mail.class));
+
+
+        // When
+        CreatedTrelloCardDto createdTrelloCardDto = trelloService.createTrelloCard(trelloCardDto);
+        // Then
+        assertEquals("test", createdTrelloCardDto.getName());
+    }
 
     @Test
     void shouldSendInformationMail() {
