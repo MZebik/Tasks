@@ -22,7 +22,7 @@ public class EmailScheduler {
         long size = taskRepository.count();
         String mes1 = "Currently in database you got: " + size + " task";
         String mes2 = "Currently in database you got: " + size + " tasks";
-        simpleEmailService.send(
+        simpleEmailService.sendInformationEmail(
                 new Mail(
                         adminConfig.getAdminMail(),
                         SUBJECT,
