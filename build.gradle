@@ -28,7 +28,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'com.google.code.gson:gson'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 
 	compileOnly 'org.projectlombok:lombok:1.18.24'
